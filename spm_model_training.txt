@@ -1,0 +1,46 @@
+hello how are you
+नमस्ते आप कैसे हैं
+i am a student
+मैं एक छात्र हूँ
+what is your name
+आपका नाम क्या है
+where do you live
+आप कहाँ रहते हैं
+thank you very much
+बहुत बहुत धन्यवाद
+i love programming
+मुझे प्रोग्रामिंग पसंद है
+good morning
+शुभ प्रभात
+what time is it
+क्या समय हुआ है
+how old are you
+आपकी उम्र क्या है
+i am learning python
+मैं पाइथन सीख रहा हूँ
+have a nice day
+आपका दिन शुभ हो
+good night
+शुभ रात्रि
+see you later
+बाद में मिलते हैं
+i am hungry
+मुझे भूख लगी है
+where is the bathroom
+बाथरूम कहाँ है
+hello how are you
+प्रणाम अहां केहन छी
+i am a student
+हम छात्र छी
+what is your name
+अहांक नाम की अछि
+where do you live
+अहां कतय रहैत छी
+thank you very much
+बहुत बहुत धन्यवाद
+i love programming
+हमरा प्रोग्रामिंग पसंद अछि
+good morning
+शुभ प्रभात
+what time is it
+किएक समय भेल अछि

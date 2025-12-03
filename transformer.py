@@ -25,8 +25,8 @@ warnings.filterwarnings('ignore')
 # ============================================================================
 
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
-print(f"🔧 Using device: {device}")
-print(f"🔥 PyTorch version: {torch.__version__}")
+print(f"Using device: {device}")
+print(f"PyTorch version: {torch.__version__}")
 
 # Model hyperparameters (paper defaults)
 N = 6                    # Number of encoder/decoder layers
@@ -550,7 +550,7 @@ def create_sample_data():
 
 def train_tokenizer(pairs, vocab_size=8000, model_prefix="spm_model"):
     """Train SentencePiece tokenizer on the dataset"""
-    print("🔤 Training SentencePiece tokenizer...")
+    print("Training SentencePiece tokenizer...")
     
     # Write all text to a file for tokenizer training
     training_file = f"{model_prefix}_training.txt"
@@ -572,7 +572,7 @@ def train_tokenizer(pairs, vocab_size=8000, model_prefix="spm_model"):
         f'--max_sentence_length=10000'
     )
     
-    print(f"✅ Tokenizer trained and saved as {model_prefix}.model")
+    print(f"OK: Tokenizer trained and saved as {model_prefix}.model")
     return f"{model_prefix}.model"
 
 # ============================================================================
@@ -582,34 +582,34 @@ def train_tokenizer(pairs, vocab_size=8000, model_prefix="spm_model"):
 def main():
     """Main training function"""
     print("=" * 70)
-    print("🚀 FULL TRANSFORMER IMPLEMENTATION - Attention Is All You Need")
+    print("FULL TRANSFORMER IMPLEMENTATION - Attention Is All You Need")
     print("=" * 70)
     
     try:
         # Step 1: Create or load dataset
-        print("\n📝 Step 1: Preparing dataset...")
+        print("\nStep 1: Preparing dataset...")
         train_pairs = create_sample_data()
-        print(f"✅ Created {len(train_pairs)} translation pairs")
+        print(f"OK: Created {len(train_pairs)} translation pairs")
         
         # Step 2: Train tokenizer
-        print("\n🔤 Step 2: Training tokenizer...")
-        tokenizer_model_path = train_tokenizer(train_pairs, vocab_size=2000, model_prefix="spm_model")
+        print("\nStep 2: Training tokenizer...")
+        tokenizer_model_path = train_tokenizer(train_pairs, vocab_size=500, model_prefix="spm_model")
         
         # Step 3: Initialize vocabularies
-        print("\n📚 Step 3: Initializing vocabularies...")
+        print("\nStep 3: Initializing vocabularies...")
         SRC = SentencePieceVocab(tokenizer_model_path)
         TGT = SentencePieceVocab(tokenizer_model_path)
         vocab_size = SRC.get_vocab_size()
-        print(f"✅ Vocabulary size: {vocab_size}")
+        print(f"OK: Vocabulary size: {vocab_size}")
         
         # Step 4: Create dataset and dataloader
-        print("\n📦 Step 4: Creating dataloader...")
+        print("\nStep 4: Creating dataloader...")
         dataset = TranslationDataset(train_pairs, SRC, TGT, max_length=max_length)
         dataloader = DataLoader(dataset, batch_size=batch_size, shuffle=True, collate_fn=collate_fn)
-        print(f"✅ Dataset created with {len(dataset)} samples")
+        print(f"OK: Dataset created with {len(dataset)} samples")
         
         # Step 5: Initialize model
-        print("\n🧠 Step 5: Initializing Transformer model...")
+        print("\nStep 5: Initializing Transformer model...")
         print(f"   Model parameters: N={N}, d_model={d_model}, d_ff={d_ff}, h={h}")
         model = make_model(
             vocab_size,
@@ -624,30 +624,30 @@ def main():
         # Count parameters
         total_params = sum(p.numel() for p in model.parameters())
         trainable_params = sum(p.numel() for p in model.parameters() if p.requires_grad)
-        print(f"✅ Model created with {total_params:,} total parameters ({trainable_params:,} trainable)")
+        print(f"OK: Model created with {total_params:,} total parameters ({trainable_params:,} trainable)")
         
         # Step 6: Setup training
-        print("\n⚙️ Step 6: Setting up training...")
+        print("\nStep 6: Setting up training...")
         criterion = LabelSmoothing(size=vocab_size, padding_idx=0, smoothing=0.1)
         optimizer = optim.Adam(model.parameters(), lr=learning_rate, betas=(0.9, 0.98), eps=1e-9)
-        print(f"✅ Optimizer: Adam (lr={learning_rate})")
+        print(f"OK: Optimizer: Adam (lr={learning_rate})")
         
         # Step 7: Training loop
-        print("\n🔥 Step 7: Starting training...")
+        print("\nStep 7: Starting training...")
         print(f"   Training for {num_epochs} epochs...")
         print("=" * 70)
         
         for epoch in range(num_epochs):
-            print(f"\n📅 Epoch {epoch + 1}/{num_epochs}")
+            print(f"\nEpoch {epoch + 1}/{num_epochs}")
             loss_compute = SimpleLossCompute(model.generator, criterion, optimizer)
             avg_loss = run_epoch(dataloader, model, loss_compute)
-            print(f"📉 Average Loss: {avg_loss:.6f}")
+            print(f"Average Loss: {avg_loss:.6f}")
         
         print("\n" + "=" * 70)
-        print("✅ Training completed!")
+        print("Training completed!")
         
         # Step 8: Save model
-        print("\n💾 Step 8: Saving model...")
+        print("\nStep 8: Saving model...")
         model_path = "transformer_model.pth"
         torch.save({
             'model_state_dict': model.state_dict(),
@@ -659,10 +659,10 @@ def main():
             'h': h,
             'dropout': dropout,
         }, model_path)
-        print(f"✅ Model saved to {model_path}")
+        print(f"OK: Model saved to {model_path}")
         
         # Step 9: Test translations
-        print("\n🧪 Step 9: Testing translations...")
+        print("\nStep 9: Testing translations...")
         print("=" * 70)
         
         test_sentences = [
@@ -675,17 +675,17 @@ def main():
         
         for sent in test_sentences:
             translation = translate(model, SRC, TGT, sent)
-            print(f"🔤 English: {sent}")
-            print(f"🌍 Translation: {translation}")
+            print(f"English: {sent}")
+            print(f"Translation: {translation}")
             print("-" * 70)
         
         print("\n" + "=" * 70)
-        print("🎉 SUCCESS! Your Transformer is trained and ready!")
+        print("SUCCESS! Your Transformer is trained and ready!")
         print("=" * 70)
         
     except Exception as e:
-        print(f"\n💥 ERROR: {e}")
-        print("\n🔍 Stack trace:")
+        print(f"\nERROR: {e}")
+        print("\nStack trace:")
         traceback.print_exc()
         sys.exit(1)
 
