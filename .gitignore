@@ -1,0 +1,38 @@
+# Model files (too large for GitHub)
+*.pth
+*.pt
+*.ckpt
+*.h5
+*.pb
+
+# Tokenizer models (can be regenerated)
+*.model
+*.vocab
+
+# Training data files
+*_training.txt
+
+# Python cache
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+
+# Virtual environments
+venv/
+env/
+ENV/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+
