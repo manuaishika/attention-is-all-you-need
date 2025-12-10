@@ -31,6 +31,34 @@ batch_size = 64, num_epochs = 20
 
 
 
+## Testing the Model
+
+After training, test your model:
+
+```bash
+python test_model_simple.py
+```
+
+Or use in Python:
+```python
+from transformer import translate, make_model, SentencePieceVocab
+import torch
+
+# Load model
+checkpoint = torch.load('transformer_model.pth')
+model = make_model(...)  # Use checkpoint values
+model.load_state_dict(checkpoint['model_state_dict'])
+model.eval()
+
+# Load tokenizers
+SRC = SentencePieceVocab("spm_model.model")
+TGT = SentencePieceVocab("spm_model.model")
+
+# Translate
+result = translate(model, SRC, TGT, "hello how are you")
+print(result)
+```
+
 ## References
 
 - Paper: [Attention Is All You Need](https://arxiv.org/abs/1706.03762)
