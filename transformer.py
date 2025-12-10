@@ -20,6 +20,12 @@ from torch.utils.data import Dataset, DataLoader
 import warnings
 warnings.filterwarnings('ignore')
 
+# Fix Unicode encoding for Windows console
+if sys.platform == 'win32':
+    import io
+    sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8', errors='replace')
+    sys.stderr = io.TextIOWrapper(sys.stderr.buffer, encoding='utf-8', errors='replace')
+
 # ============================================================================
 # CONFIGURATION
 # ============================================================================
@@ -676,7 +682,11 @@ def main():
         for sent in test_sentences:
             translation = translate(model, SRC, TGT, sent)
             print(f"English: {sent}")
-            print(f"Translation: {translation}")
+            try:
+                print(f"Translation: {translation}")
+            except UnicodeEncodeError:
+                # Fallback for Windows console encoding issues
+                print(f"Translation: [Hindi/Maithili text - check output file]")
             print("-" * 70)
         
         print("\n" + "=" * 70)
