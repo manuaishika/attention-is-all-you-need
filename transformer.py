@@ -530,32 +530,159 @@ def translate(model, src_vocab, tgt_vocab, sentence, max_len=50):
 def create_sample_data():
     """Create sample English-Hindi-Maithili data for demonstration"""
     sample_pairs = [
-        # English to Hindi
+        # English to Hindi - Greetings
         ("hello how are you", "नमस्ते आप कैसे हैं"),
-        ("i am a student", "मैं एक छात्र हूँ"),
-        ("what is your name", "आपका नाम क्या है"),
-        ("where do you live", "आप कहाँ रहते हैं"),
-        ("thank you very much", "बहुत बहुत धन्यवाद"),
-        ("i love programming", "मुझे प्रोग्रामिंग पसंद है"),
+        ("i am fine", "मैं ठीक हूँ"),
         ("good morning", "शुभ प्रभात"),
-        ("what time is it", "क्या समय हुआ है"),
-        ("how old are you", "आपकी उम्र क्या है"),
-        ("i am learning python", "मैं पाइथन सीख रहा हूँ"),
-        ("have a nice day", "आपका दिन शुभ हो"),
+        ("good afternoon", "नमस्कार"),
+        ("good evening", "शुभ संध्या"),
         ("good night", "शुभ रात्रि"),
+        ("nice to meet you", "आपसे मिलकर खुशी हुई"),
         ("see you later", "बाद में मिलते हैं"),
-        ("i am hungry", "मुझे भूख लगी है"),
-        ("where is the bathroom", "बाथरूम कहाँ है"),
+        ("see you tomorrow", "कल मिलते हैं"),
+        ("have a nice day", "आपका दिन शुभ हो"),
         
-        # English to Maithili
-        ("hello how are you", "प्रणाम अहां केहन छी"),
-        ("i am a student", "हम छात्र छी"),
-        ("what is your name", "अहांक नाम की अछि"),
-        ("where do you live", "अहां कतय रहैत छी"),
+        # English to Hindi - Personal Information
+        ("what is your name", "आपका नाम क्या है"),
+        ("my name is john", "मेरा नाम जॉन है"),
+        ("i am a student", "मैं एक छात्र हूँ"),
+        ("i am a teacher", "मैं एक शिक्षक हूँ"),
+        ("how old are you", "आपकी उम्र क्या है"),
+        ("i am twenty years old", "मैं बीस साल का हूँ"),
+        ("where do you live", "आप कहाँ रहते हैं"),
+        ("i live in delhi", "मैं दिल्ली में रहता हूँ"),
+        ("where are you from", "आप कहाँ से हैं"),
+        ("i am from mumbai", "मैं मुंबई से हूँ"),
+        
+        # English to Hindi - Questions
+        ("what time is it", "क्या समय हुआ है"),
+        ("what is this", "यह क्या है"),
+        ("who are you", "आप कौन हैं"),
+        ("where is the bathroom", "बाथरूम कहाँ है"),
+        ("where is the hospital", "अस्पताल कहाँ है"),
+        ("where is the school", "स्कूल कहाँ है"),
+        ("how much does this cost", "यह कितने का है"),
+        ("what do you want", "आप क्या चाहते हैं"),
+        ("how can i help you", "मैं आपकी कैसे मदद कर सकता हूँ"),
+        ("what are you doing", "आप क्या कर रहे हैं"),
+        
+        # English to Hindi - Actions and Activities
+        ("i am learning python", "मैं पाइथन सीख रहा हूँ"),
+        ("i love programming", "मुझे प्रोग्रामिंग पसंद है"),
+        ("i am reading a book", "मैं एक किताब पढ़ रहा हूँ"),
+        ("i am watching television", "मैं टेलीविजन देख रहा हूँ"),
+        ("i am going to school", "मैं स्कूल जा रहा हूँ"),
+        ("i am eating food", "मैं खाना खा रहा हूँ"),
+        ("i am drinking water", "मैं पानी पी रहा हूँ"),
+        ("i am sleeping", "मैं सो रहा हूँ"),
+        ("i am working", "मैं काम कर रहा हूँ"),
+        ("i am studying", "मैं पढ़ाई कर रहा हूँ"),
+        
+        # English to Hindi - Feelings and States
+        ("i am hungry", "मुझे भूख लगी है"),
+        ("i am thirsty", "मुझे प्यास लगी है"),
+        ("i am tired", "मैं थक गया हूँ"),
+        ("i am happy", "मैं खुश हूँ"),
+        ("i am sad", "मैं दुखी हूँ"),
+        ("i am angry", "मैं गुस्सा हूँ"),
+        ("i am excited", "मैं उत्साहित हूँ"),
+        ("i am worried", "मैं चिंतित हूँ"),
+        ("i am sorry", "मुझे माफ करें"),
+        ("i am happy to see you", "आपको देखकर खुशी हुई"),
+        
+        # English to Hindi - Common Phrases
         ("thank you very much", "बहुत बहुत धन्यवाद"),
-        ("i love programming", "हमरा प्रोग्रामिंग पसंद अछि"),
+        ("thank you", "धन्यवाद"),
+        ("please help me", "कृपया मेरी मदद करें"),
+        ("please come in", "कृपया अंदर आएं"),
+        ("please sit down", "कृपया बैठिए"),
+        ("excuse me", "माफ करें"),
+        ("i do not understand", "मैं समझा नहीं"),
+        ("can you repeat that", "क्या आप दोहरा सकते हैं"),
+        ("speak slowly please", "कृपया धीरे बोलें"),
+        ("yes i understand", "हाँ मैं समझ गया"),
+        
+        # English to Hindi - Numbers and Time
+        ("one two three", "एक दो तीन"),
+        ("what is the date today", "आज क्या तारीख है"),
+        ("it is monday today", "आज सोमवार है"),
+        ("it is morning", "सुबह है"),
+        ("it is afternoon", "दोपहर है"),
+        ("it is evening", "शाम है"),
+        ("it is night", "रात है"),
+        
+        # English to Hindi - Family and Relationships
+        ("this is my father", "यह मेरे पिता हैं"),
+        ("this is my mother", "यह मेरी माँ हैं"),
+        ("i have a brother", "मेरा एक भाई है"),
+        ("i have a sister", "मेरी एक बहन है"),
+        ("how is your family", "आपका परिवार कैसा है"),
+        ("my family is good", "मेरा परिवार ठीक है"),
+        
+        # English to Hindi - Food and Drinks
+        ("i want to eat", "मुझे खाना चाहिए"),
+        ("i like rice", "मुझे चावल पसंद है"),
+        ("i like tea", "मुझे चाय पसंद है"),
+        ("i like coffee", "मुझे कॉफी पसंद है"),
+        ("i want water", "मुझे पानी चाहिए"),
+        ("the food is delicious", "खाना स्वादिष्ट है"),
+        
+        # English to Maithili - Greetings
+        ("hello how are you", "प्रणाम अहां केहन छी"),
+        ("i am fine", "हम ठीक छी"),
         ("good morning", "शुभ प्रभात"),
+        ("good night", "शुभ रात्रि"),
+        ("nice to meet you", "अहांक संग भेट मे खुशी भेल"),
+        ("see you later", "बाद मे मिलू"),
+        
+        # English to Maithili - Personal Information
+        ("what is your name", "अहांक नाम की अछि"),
+        ("my name is john", "हमर नाम जॉन अछि"),
+        ("i am a student", "हम छात्र छी"),
+        ("i am a teacher", "हम शिक्षक छी"),
+        ("how old are you", "अहांक उम्र की अछि"),
+        ("where do you live", "अहां कतय रहैत छी"),
+        ("i live in delhi", "हम दिल्ली मे रहैत छी"),
+        ("where are you from", "अहां कतयक संग छी"),
+        
+        # English to Maithili - Questions
         ("what time is it", "किएक समय भेल अछि"),
+        ("what is this", "ई की अछि"),
+        ("where is the bathroom", "बाथरूम कतय अछि"),
+        ("what do you want", "अहां की चाहीत छी"),
+        ("how can i help you", "हम अहांक कतेक मदद करि सकैत छी"),
+        
+        # English to Maithili - Actions
+        ("i am learning python", "हम पाइथन सीखैत छी"),
+        ("i love programming", "हमरा प्रोग्रामिंग पसंद अछि"),
+        ("i am reading a book", "हम किताब पढ़ैत छी"),
+        ("i am eating food", "हम खाना खा रहल छी"),
+        ("i am drinking water", "हम पानी पी रहल छी"),
+        ("i am going to school", "हम स्कूल जा रहल छी"),
+        ("i am working", "हम काम करैत छी"),
+        
+        # English to Maithili - Feelings
+        ("i am hungry", "हमरा भूख लागल अछि"),
+        ("i am thirsty", "हमरा प्यास लागल अछि"),
+        ("i am tired", "हम थकल छी"),
+        ("i am happy", "हम खुश छी"),
+        ("i am sad", "हम दुखी छी"),
+        ("i am sorry", "हमरा माफ करब"),
+        
+        # English to Maithili - Common Phrases
+        ("thank you very much", "बहुत बहुत धन्यवाद"),
+        ("thank you", "धन्यवाद"),
+        ("please help me", "कृपया हमर मदद करू"),
+        ("please come in", "कृपया भीतर आउ"),
+        ("excuse me", "माफ करू"),
+        ("i do not understand", "हम नहि समझल"),
+        ("yes i understand", "हाँ हम समझ गेल"),
+        
+        # English to Maithili - Food
+        ("i want to eat", "हमरा खाना चाही"),
+        ("i like rice", "हमरा चावल पसंद अछि"),
+        ("i like tea", "हमरा चाय पसंद अछि"),
+        ("i want water", "हमरा पानी चाही"),
     ]
     return sample_pairs
 
@@ -604,7 +731,7 @@ def main():
         
         # Step 2: Train tokenizer
         print("\nStep 2: Training tokenizer...")
-        tokenizer_model_path = train_tokenizer(train_pairs, vocab_size=500, model_prefix="spm_model")
+        tokenizer_model_path = train_tokenizer(train_pairs, vocab_size=2000, model_prefix="spm_model")
         
         # Step 3: Initialize vocabularies
         print("\nStep 3: Initializing vocabularies...")
